@@ -14,26 +14,6 @@ def getJoke():
     tt = json.loads(data.text)
     return tt
 
-def tellJokes():
-    global client
-    joke = getJoke()
-    setup = joke["setup"]
-    punchline = joke["punchline"]
-    client.messages.create(
-        to = credentials.my_cell,
-        from_= credentials.my_twilio,
-        body="uh... tell you a joke? hm...")
-    time.sleep(4)
-    client.messages.create(
-        to = credentials.my_cell,
-        from_= credentials.my_twilio,
-        body=setup)
-    time.sleep(2)
-    client.messages.create(
-        to = credentials.my_cell,
-        from_= credentials.my_twilio,
-        body=punchline)
-
 def sendJokes():
     global client
     joke = getJoke()

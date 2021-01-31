@@ -21,7 +21,9 @@ def incoming_sms():
         weatherflag=1
 
     elif 'joke' in body.lower():
-        getJokes.tellJokes()
+        joke = getJokes.getJoke()
+        resp.message(joke["setup"])
+        resp.message(joke["punchline"])
 
     elif body == 'bye':
         resp.message("Goodbye")

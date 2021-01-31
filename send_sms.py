@@ -2,7 +2,6 @@ from twilio.rest import Client
 import credentials
 import random 
 import schedule
-import getJokes
 import time
 import getJokes
 
@@ -23,7 +22,7 @@ def send_mess(quote):
 
 quote = Morning_Stuff[random.randint(0, len(Morning_Stuff))]
 schedule.every().day.at("20:15").do(send_mess, Morning_Stuff[0])
-schedule.every().hour.do(getJokes.sendJokes())
+schedule.every().hour.do(getJokes.sendJokes)
 
 while True:
     schedule.run_pending()
