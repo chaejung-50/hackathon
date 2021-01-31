@@ -19,11 +19,11 @@ def api_response(loc):
 
         if (feels < 67):
             if ("clouds" in weather):
-                return f"It's {temp_curr} and {weather} outside. It's pretty chilly, might want to wear a jacket!"
+                return f"It's {temp_curr} degress and {weather} outside. It's pretty chilly, might want to wear a jacket!"
             else:
-                return f"It's {temp_curr} outside. You might want to wear something warm now!"
+                return f"It's {temp_curr} degress outside. You might want to wear something warm now!"
         else:
             if ("clouds" in weather and temp_min < 65):
-                return f"It's {temp_curr} outside. There are some clouds, might want to bring a jacket for later!"
+                return f"It's {temp_curr} degress outside. There are some clouds, might want to bring a jacket for later!"
             else:
-                return f"It's {temp_curr} outside. It's warm today!"
+                return f"It's {temp_curr} degress outside. It's warm today!"
