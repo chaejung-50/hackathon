@@ -1,12 +1,10 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
-import getWeather, getJokes, getCompliment, myNamDoSan
-# from Bot import SimpleChat
+import getWeather, getJokes, getCompliment, getAnime, myNamDoSan
 
 
 app = Flask(__name__)
 weatherflag = 0
-botflag = 0
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
@@ -21,12 +19,6 @@ def incoming_sms():
         weather = getWeather.api_response(body)
         resp.message(weather)
         weatherflag = 0
-    #
-    # elif botflag == 1:
-    #     bot = SimpleChat.bot_message(body)
-    #     resp.message(bot)
-    #     if "stop" in body:
-    #         botflag=0
 
     elif 'weather' in body.lower():
         resp.message("Where are you From?")
@@ -41,12 +33,13 @@ def incoming_sms():
         compliment = getCompliment.giveCompliment()
         resp.message(compliment)
 
+    elif "anime" in body.lower():
+        anime_list = getAnime.getTopAnime()
+        resp.message(anime_list)
+
     elif body == 'bye':
         resp.message("Goodbye")
 
-    elif 'bot' in body.lower():
-        resp.message("Hi! I'm your friendly AI, Nam Do San!")
-        # botflag = 1
     else:
         print('exist')
         resp.message(myNamDoSan.api_response(body))
