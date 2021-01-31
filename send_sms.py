@@ -2,6 +2,7 @@ from twilio.rest import Client
 import credentials
 import random 
 import schedule
+import time
 
 Morning_Stuff = ["i love you biiiiitch, i ain't never gonna stop loving you biiiiiitch", 
                  "Morning beautiful",
@@ -17,7 +18,7 @@ def send_mess(quote):
         body=quote)
 
 quote = Morning_Stuff[random.randint(0, len(Morning_Stuff))]
-schedule.every().day.at("8:00").do(send_mess, Morning_Stuff[0])
+schedule.every().day.at("20:15").do(send_mess, Morning_Stuff[0])
 
 while True:
     schedule.run_pending()
