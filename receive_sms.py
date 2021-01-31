@@ -1,13 +1,16 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 import getWeather, getJokes, getCompliment
+import SimpleChat
 
 app = Flask(__name__)
 weatherflag = 0
+botflag = 0
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     global weatherflag
+    global botflag
 	# Get the message the user sent to Twilio number
     body = request.values.get('Body', None)
 
@@ -17,6 +20,11 @@ def incoming_sms():
         weather = getWeather.api_response(body)
         resp.message(weather)
         weatherflag = 0
+
+    elif botflag == 1:
+        bot = SimpleChat.bot_message(body)
+        resp.message(bot)
+        botflag = 0
 
     elif 'weather' in body.lower():
         resp.message("Where are you From?")
@@ -33,6 +41,10 @@ def incoming_sms():
 
     elif body == 'bye':
         resp.message("Goodbye")
+
+    elif "bot" in body:
+        resp.message("Hi! I'm your friendly AI, Na Do San!")
+        botflag = 1
 
   
     return str(resp)
