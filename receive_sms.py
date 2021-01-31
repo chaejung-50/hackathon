@@ -41,7 +41,6 @@ def incoming_sms():
         resp.message("Goodbye")
 
     else:
-        print('exist')
         resp.message(myNamDoSan.api_response(body))
 
     return str(resp)

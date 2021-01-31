@@ -1,14 +1,12 @@
+import requests
+import json
 import credentials
-import wolframalpha
 
 
-def api_response(input):
+def api_response(query):
+    response = requests.get(f"http://api.wolframalpha.com/v1/conversation.jsp?appid={credentials.my_wolfram}&i={query}")
 
-    app_id = credentials.my_wolfram
-    client = wolframalpha.Client(app_id)
-
-    res = client.query(input)
-
-    # Includes only text from the response
-    answer = next(res.results).text
-    return answer
+    if (response.status_code == 404):
+        return "ERROR IN CONNECTIONS"
+    else:
+        return (response.json()['result'])
