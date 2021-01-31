@@ -1,6 +1,6 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
-import getWeather, getJokes, getCompliment
+import getWeather, getJokes, getCompliment, myNamDoSan
 # from Bot import SimpleChat
 
 
@@ -47,7 +47,9 @@ def incoming_sms():
     elif 'bot' in body.lower():
         resp.message("Hi! I'm your friendly AI, Nam Do San!")
         # botflag = 1
-
+    else:
+        print('exist')
+        resp.message(myNamDoSan.api_response(body))
 
     return str(resp)
  
