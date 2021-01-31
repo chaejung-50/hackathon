@@ -18,3 +18,8 @@ We learned a lot about API calls and establishing the correct connections betwee
 
 ## What's next for The Perfect Partner
 In the future, we would love to add video and voice input with recognition and potentially make this into a mobile application that can support more and more users. We would love to develop our own ML/AI ChatBot that could be trained to be better than the Wolfram API. At first, we hoped to develop a more health based, Chat bot, so we hope to incorporate that vision in the future and develop a therapy bot feature where a user can get some advice or be connected with a therapist.
+
+## How to run
+`python receive_sms.py`
+
+`python send_sms.py`
