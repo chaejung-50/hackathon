@@ -9,7 +9,6 @@ weatherflag = 0
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     global weatherflag
-    # global botflag
 	# Get the message the user sent to Twilio number
     body = request.values.get('Body', None)
 
@@ -33,7 +32,7 @@ def incoming_sms():
         compliment = getCompliment.giveCompliment()
         resp.message(compliment)
 
-    elif "anime" in body.lower():
+    elif 'anime' in body.lower():
         anime_list = getAnime.getTopAnime()
         resp.message(anime_list)
 
