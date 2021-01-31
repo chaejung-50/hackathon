@@ -1,9 +1,10 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
-import getWeather, getJokes
+import getWeather, getJokes, getCompliment
 
 app = Flask(__name__)
 weatherflag = 0
+
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     global weatherflag
@@ -16,6 +17,7 @@ def incoming_sms():
         weather = getWeather.api_response(body)
         resp.message(weather)
         weatherflag = 0
+
     elif 'weather' in body.lower():
         resp.message("Where are you From?")
         weatherflag=1
@@ -24,6 +26,10 @@ def incoming_sms():
         joke = getJokes.getJoke()
         resp.message(joke["setup"])
         resp.message(joke["punchline"])
+
+    elif 'compliment' in body.lower() or ("say" in body.lower() and "nice" in body.lower() and "something" in body.lower()):
+        compliment = getCompliment.giveCompliment()
+        resp.message(compliment)
 
     elif body == 'bye':
         resp.message("Goodbye")
